@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "cstdlib": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cassert": "cpp"
+    }
+}
