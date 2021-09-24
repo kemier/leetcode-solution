@@ -54,6 +54,7 @@
         "map": "cpp",
         "queue": "cpp",
         "fstream": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "climits": "cpp"
     }
 }
