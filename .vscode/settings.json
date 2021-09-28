@@ -55,6 +55,7 @@
         "queue": "cpp",
         "fstream": "cpp",
         "sstream": "cpp",
-        "climits": "cpp"
+        "climits": "cpp",
+        "list": "cpp"
     }
 }
