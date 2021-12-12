@@ -42,3 +42,6 @@ settings.json
 *.ps
 *.suo
 *.cmd
+
+#debug binary
+debug/*
