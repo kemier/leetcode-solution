@@ -3,34 +3,7 @@
 
 using namespace std;
 
-class Solution //二分查找
-{
-public:
-    int findMin(vector<int> &nums)
-    {
-        int low = 0;
-        int high = nums.size() - 1;
-        while (low < high)
-        {
-            int pivot = low + (high - low) / 2;
-            if (nums[pivot] < nums[high])
-            {
-                high = pivot;
-            }
-            else if (nums[pivot] > nums[high])
-            {
-                low = pivot + 1;
-            }
-            else
-            {
-                high -= 1;
-            }
-        }
-        return nums[low];
-    }
-};
-
-class Solution2 //基数排序
+class Solution //基数排序
 {
 public:
     int maximumGap(vector<int> &nums)
@@ -75,10 +48,10 @@ public:
     }
 };
 
-class Solution3 //基于桶的算法
+class Solution2 //基于桶的算法
 {
 public:
-    int maximumGap(vector<int> &nums)
+    int maximumGap(vector<  int> &nums)
     {
         int n = nums.size();
         if (n < 2)
