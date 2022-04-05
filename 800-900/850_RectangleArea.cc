@@ -1,6 +1,8 @@
 #include <vector>
 #include <set>
 #include <unordered_map>
+#include <functional>
+#include <algorithm>
 
 using namespace std;
 
@@ -104,6 +106,55 @@ public:
             cur_y = y;
         }
 
+        return res;
+    }
+};
+
+class Solution2 //从左往右，线性扫描
+{
+public:
+    int rectangleArea(vector<vector<int>> &rectangles)
+    {
+        //从左往右，线性扫描
+        int MOD = 1e9 + 7;
+        int OPEN = 0;
+        int CLOSE = 1;
+        vector<tuple<int, int, int, int>> rec;
+        for (auto v : rectangles)
+        {
+            int x1 = v[0], y1 = v[1], x2 = v[2], y2 = v[3];
+            rec.push_back({x1, OPEN, y1, y2});
+            rec.push_back({x2, CLOSE, y1, y2});
+        }
+        sort(rec.begin(), rec.end());
+
+        multiset<pair<int, int>> activate;
+
+        std::function<int()> query = [&]()
+        {
+            int res = 0;
+            int D = -1;
+            for (auto [y1, y2] : activate)
+            {
+                D = max(D, y1);
+                res += max(0, y2 - D);
+                D = max(D, y2);
+            }
+            return res;
+        };
+
+        int cur_x = get<0>(rec[0]);
+        long res = 0;
+        for (auto [x, state, y1, y2] : rec)
+        {
+            res += (long long)query() * (x - cur_x);
+            res %= MOD;
+            if (state == OPEN)
+                activate.insert({y1, y2});
+            else
+                activate.erase(activate.find(pair<int, int>{y1, y2}));
+            cur_x = x;
+        }
         return res;
     }
 };

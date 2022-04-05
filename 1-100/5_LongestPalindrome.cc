@@ -38,7 +38,7 @@ public:
         }
         return R - L + 1;
     }
-}
+};
 
 class Solution2 //动态规划
 {
