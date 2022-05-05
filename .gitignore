@@ -46,3 +46,6 @@ settings.json
 
 #debug binary
 debug/*
+
+
+test*

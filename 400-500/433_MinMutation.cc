@@ -2,14 +2,17 @@
 
 using namespace std;
 
-class Solution { //二进制转换+异或运算
+class Solution
+{ //二进制转换+异或运算
 public:
-    int minMutation(string start, string end, vector<string> bank) {
+    int minMutation(string start, string end, vector<string> bank)
+    {
         int a = convertGene(start);
         int b = convertGene(end);
 
-        vector<int>  s(bank.size(),0);
-        for (int i = 0; i < s.size(); ++i) {
+        vector<int> s(bank.size(), 0);
+        for (int i = 0; i < s.size(); ++i)
+        {
             string str = bank[i];
             s[i] = convertGene(str);
         }
@@ -19,16 +22,19 @@ public:
 
         // 方法2: 也可以
         // int ans = dfs(a, b, s, vector<int>(bank.size(),0));
-        // return ans == MAX_VALUE ? -1 : ans;
+        // return ans == INT_MAX ? -1 : ans;
     }
 
 private:
-    int convertGene(string gene) {
+    int convertGene(string gene)
+    {
         int result = 0;
-        for (int i = 0; i < gene.length(); ++i) {
+        for (int i = 0; i < gene.length(); ++i)
+        {
             char c = gene[i];
-            int value = 1;  // default: 0 for 'A'
-            switch (c) {
+            int value = 1; // default: 0 for 'A'
+            switch (c)
+            {
             case 'C':
                 value = 2;
                 break;
@@ -41,7 +47,8 @@ private:
             }
 
             result |= value;
-            if (i != gene.length() - 1) {
+            if (i != gene.length() - 1)
+            {
                 result <<= 4;
             }
         }
@@ -49,7 +56,8 @@ private:
         return result;
     }
 
-    bool isNeibor(int a, int b) {
+    bool isNeibor(int a, int b)
+    {
         b = a ^ b;
         a = b & (b - 1);
         b = a & (a - 1);
@@ -57,26 +65,32 @@ private:
         return a != 0 && b == 0;
     }
 
-    int bfs(int a, int b, vector<int> s) {
+    int bfs(int a, int b, vector<int> s)
+    {
         queue<int> q;
-        vector<int> v(s.size(),0);
+        vector<int> v(s.size(), 0);
 
-        q.insert(a);
+        q.push(a);
 
         int level = 0;
-        while (!q.empty()) {
+        while (!q.empty())
+        {
             int size = q.size();
-            while (size-- > 0) {
-                int x = q.top();
+            while (size-- > 0)
+            {
+                int x = q.front();
                 q.pop();
-                if (x == b) {
+                if (x == b)
+                {
                     return level;
                 }
 
-                for (int i = 0; i < s.length(); ++i) {
-                    if (!v[i] && isNeibor(x, s[i])) {
+                for (int i = 0; i < s.size(); ++i)
+                {
+                    if (!v[i] && isNeibor(x, s[i]))
+                    {
                         v[i] = 1;
-                        q.insert(s[i]);
+                        q.push(s[i]);
                     }
                 }
             }
@@ -87,15 +101,20 @@ private:
         return -1;
     }
 
-    int dfs(int a, int b, vector<int> s, vector<int> v) {
-        if (a == b) {
+    int dfs(int a, int b, vector<int> s, vector<int> v)
+    {
+        if (a == b)
+        {
             return 0;
         }
 
-        int minRet = MAX_VALUE - 1;
-        for (int i = 0; i < s.size(); ++i) {
-            if (!v[i]) {
-                if (isNeibor(a, s[i])) {
+        int minRet = INT_MAX - 1;
+        for (int i = 0; i < s.size(); ++i)
+        {
+            if (!v[i])
+            {
+                if (isNeibor(a, s[i]))
+                {
                     v[i] = 1;
                     int ret = dfs(s[i], b, s, v);
                     minRet = min(minRet, ret);
@@ -104,8 +123,6 @@ private:
             }
         }
 
-        return 1 + min(minRet, MAX_VALUE - 1);
+        return 1 + min(minRet, INT_MAX - 1);
     }
-
-
 };
