@@ -2,6 +2,13 @@
 #include <algorithm>
 using namespace std;
 
+
+//source: https://leetcode.cn/problems/reverse-pairs/
+//merge sort
+//Time complexity: O(nlogn)
+//Space complexity: O(n)
+
+
 class Solution
 {
 public:

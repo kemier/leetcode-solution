@@ -1,13 +1,18 @@
-//
-// Created by 曾宁 on 2023/10/1.
-//
-
-#include <bits/stdc++.h>
-
+#include <vector>
+#include <queue>
+#include <algorithm>
 using namespace std;
 
+
+
 typedef pair<int,int> pii;
-//利用堆的贪心算法
+
+//source: https://www.leetcode.cn/problems/ipo/
+//greedy + heap
+//Time complexity: O(nlogn)
+//Space complexity: O(n)
+
+
 class Solution {
 public:
     int findMaximizedCapital(int k, int w, vector<int>& profits, vector<int>& capital) {
@@ -36,4 +41,3 @@ public:
         return w;
     }
 };
-

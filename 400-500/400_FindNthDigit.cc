@@ -2,6 +2,10 @@
 
 using namespace std;
 
+//source: https://leetcode.cn/problems/nth-digit/
+//数学
+//Time complexity: O(logn)
+//Space complexity: O(1)
 
 class Solution {
 public:
