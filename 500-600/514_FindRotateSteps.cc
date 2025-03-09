@@ -1,10 +1,15 @@
 #include <vector>
 #include <string>
-#include <climits>
-
+#include <algorithm>
 using namespace std;
 
-class Solution //动态规划
+//source: https://leetcode-cn.com/problems/freedom-trail/
+//动态规划
+//Time complexity: O(m*n^2)
+//Space complexity: O(n*m)
+//n是ring的长度，m是key的长度
+
+class Solution
 {
 public:
     int findRotateSteps(string ring, string key)
@@ -31,41 +36,5 @@ public:
             }
         }
         return *min_element(dp[m - 1].begin(), dp[m - 1].end());
-    }
-};
-
-class Solution2 // DFS
-{
-public:
-    vector<vector<int>> memo;
-    int findRotateSteps(string ring, string key)
-    {
-        memo.assign(ring.size(), vector<int>(key.size(), -1));
-        return dfs(ring, 0, key, 0) + key.size();
-    }
-
-    int dfs(string ring, int i, string key, int j)
-    {
-        int n = ring.size(), m = key.size();
-
-        if (j == key.size())
-        {
-            return 0;
-        }
-
-        if (memo[i][j] != -1)
-            return memo[i][j];
-
-        int step = INT_MAX;
-        for (int p = 0; p < ring.size(); p++)
-        {
-            if (ring[p] == key[j])
-            {
-                step = min(step, dfs(ring, p, key, j + 1) + min(abs(p - i), n - abs(p - i)));
-            }
-        }
-
-        memo[i][j] = step;
-        return memo[i][j];
     }
 };
